@@ -1,12 +1,11 @@
 package com.fullcycle.admin.catalogo.application.category;
 
-import com.fullcycle.admin.catalogo.application.UseCase;
 import com.fullcycle.admin.catalogo.application.UseCaseTest;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryCommand;
 import com.fullcycle.admin.catalogo.application.category.create.DefaultCreateCategoryUseCase;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
-import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -27,6 +26,10 @@ public class CreateCategoryUseCaseTest extends UseCaseTest {
     @InjectMocks
     private DefaultCreateCategoryUseCase useCase;
 
+    @BeforeEach
+    void cleanUp(){
+        Mockito.reset(categoryGateway);
+    }
     @Test
     public void givenAValidCommand_whenCallsCreateCategory_shouldReturnCategoryId() {
         final var expectedName = "Filmes";
