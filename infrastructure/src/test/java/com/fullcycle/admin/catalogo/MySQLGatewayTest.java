@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalogo.infrastructure;
+package com.fullcycle.admin.catalogo;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +21,6 @@ import static org.springframework.context.annotation.FilterType.REGEX;
                 @ComponentScan.Filter(type = REGEX, pattern = ".*[MySQLGateway]")
         }
 )
-@ExtendWith(MySQLCleanUpExtensions.class)
+@ExtendWith(CleanUpExtensions.class)
 public @interface MySQLGatewayTest {
 }
