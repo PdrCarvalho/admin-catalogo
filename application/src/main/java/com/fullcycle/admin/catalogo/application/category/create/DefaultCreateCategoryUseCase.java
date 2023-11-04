@@ -1,40 +1,37 @@
 package com.fullcycle.admin.catalogo.application.category.create;
 
+import static io.vavr.API.Try;
+import static io.vavr.control.Either.left;
+
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.validation.handler.Notification;
 import io.vavr.control.Either;
-
 import java.util.Objects;
-
-import static io.vavr.API.Try;
-import static io.vavr.control.Either.left;
 
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
 
-    private final CategoryGateway categoryGateway;
+  private final CategoryGateway categoryGateway;
 
-    public DefaultCreateCategoryUseCase(final  CategoryGateway categoryGateway){
+  public DefaultCreateCategoryUseCase(final CategoryGateway categoryGateway) {
 
-        this.categoryGateway = Objects.requireNonNull(categoryGateway);
-    }
-    @Override
-    public Either<Notification,CreateCategoryOutput> execute(CreateCategoryCommand command) {
-        final var notification = Notification.create();
-        final var category = Category.newCategory(
-                command.name(),
-                command.description(),
-                command.isActive()
-        );
-        category.validate(notification);
+    this.categoryGateway = Objects.requireNonNull(categoryGateway);
+  }
 
-        return notification.hasError()? left(notification): create(category);
-    }
+  @Override
+  public Either<Notification, CreateCategoryOutput> execute(CreateCategoryCommand command) {
+    final var notification = Notification.create();
+    final var category =
+        Category.newCategory(command.name(), command.description(), command.isActive());
+    category.validate(notification);
 
-    private Either<Notification,CreateCategoryOutput> create(final Category category) {
+    return notification.hasError() ? left(notification) : create(category);
+  }
 
-        return Try(()->  this.categoryGateway.create(category))
-                .toEither()
-                .bimap(Notification::create,CreateCategoryOutput::from);
-    }
+  private Either<Notification, CreateCategoryOutput> create(final Category category) {
+
+    return Try(() -> this.categoryGateway.create(category))
+        .toEither()
+        .bimap(Notification::create, CreateCategoryOutput::from);
+  }
 }

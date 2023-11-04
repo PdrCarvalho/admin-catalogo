@@ -17,34 +17,34 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CategoryUseCaseConfig {
 
-    private final CategoryGateway categoryGateway;
+  private final CategoryGateway categoryGateway;
 
-    public CategoryUseCaseConfig(final CategoryGateway categoryGateway){
-        this.categoryGateway = categoryGateway;
-    }
+  public CategoryUseCaseConfig(final CategoryGateway categoryGateway) {
+    this.categoryGateway = categoryGateway;
+  }
 
-    @Bean
-    public CreateCategoryUseCase createCategoryUseCase() {
-        return new DefaultCreateCategoryUseCase(categoryGateway);
-    }
+  @Bean
+  public CreateCategoryUseCase createCategoryUseCase() {
+    return new DefaultCreateCategoryUseCase(categoryGateway);
+  }
 
-    @Bean
-    public UpdateCategoryUseCase updateCategoryUseCase() {
-        return new DefaultUpdateCategoryUseCase(categoryGateway);
-    }
+  @Bean
+  public UpdateCategoryUseCase updateCategoryUseCase() {
+    return new DefaultUpdateCategoryUseCase(categoryGateway);
+  }
 
-    @Bean
-    public GetCategoryByIdUseCase getCategoryByIdUseCase() {
-        return new DefaultGetCategoryByIdUseCase(categoryGateway);
-    }
+  @Bean
+  public GetCategoryByIdUseCase getCategoryByIdUseCase() {
+    return new DefaultGetCategoryByIdUseCase(categoryGateway);
+  }
 
-    @Bean
-    public ListCategoriesUseCase listCategoriesUseCase() {
-        return new DefaultListCategoriesUseCase(categoryGateway);
-    }
+  @Bean
+  public ListCategoriesUseCase listCategoriesUseCase() {
+    return new DefaultListCategoriesUseCase(categoryGateway);
+  }
 
-    @Bean
-    public DeleteCategoryUseCase deleteCategoryUseCase() {
-        return new DefaultDeleteCategoryUseCase(categoryGateway);
-    }
+  @Bean
+  public DeleteCategoryUseCase deleteCategoryUseCase() {
+    return new DefaultDeleteCategoryUseCase(categoryGateway);
+  }
 }

@@ -11,6 +11,8 @@ repositories {
 }
 spotless {
     java {
+        target 'infrastructure/src/main/java/**/*.java', 'domain/src/main/java/**/*.java', 'application/src/main/java/**/*.java'
+
         // Use the default importOrder configuration
         importOrder()
 
@@ -24,7 +26,6 @@ spotless {
 
         formatAnnotations()  // fixes formatting of type annotations, see below
 
-        licenseHeader '/* (C) $YEAR */' // or licenseHeaderFile
     }
 }
 
