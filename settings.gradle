@@ -2,4 +2,3 @@ rootProject.name = 'dfc-admin-catologo'
 include 'domain'
 include 'application'
 include 'infrastructure'
-
