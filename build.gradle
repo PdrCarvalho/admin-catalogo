@@ -17,7 +17,7 @@ spotless {
         setEncoding('utf-8')
     }
     java {
-
+        target 'src/*/java/**/*.java'
         importOrder()
         removeUnusedImports()
         googleJavaFormat()
