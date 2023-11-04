@@ -3,10 +3,13 @@ package com.fullcycle.admin.catalogo.infrastructure.api.controllers;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryCommand;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryUseCase;
 import com.fullcycle.admin.catalogo.application.category.retrieve.get.GetCategoryByIdUseCase;
+import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryCommand;
+import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCase;
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
 import com.fullcycle.admin.catalogo.infrastructure.api.CategoryApi;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryApiOutput;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryApiInput;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryApiInput;
 import com.fullcycle.admin.catalogo.infrastructure.category.presenters.CategoryApiPresenter;
 import java.net.URI;
 import java.util.Objects;
@@ -20,11 +23,16 @@ public class CategoryController implements CategoryApi {
 
   private final GetCategoryByIdUseCase getCategoryByIdUseCase;
 
+  private final UpdateCategoryUseCase updateCategoryUseCase;
+
   public CategoryController(
       final CreateCategoryUseCase createCategoryUseCase,
-      final GetCategoryByIdUseCase getCategoryByIdUseCase) {
+      final GetCategoryByIdUseCase getCategoryByIdUseCase,
+      final UpdateCategoryUseCase updateCategoryUseCase
+  ) {
     this.createCategoryUseCase = Objects.requireNonNull(createCategoryUseCase);
     this.getCategoryByIdUseCase = Objects.requireNonNull(getCategoryByIdUseCase);
+    this.updateCategoryUseCase = Objects.requireNonNull(updateCategoryUseCase);
   }
 
   @Override
@@ -51,5 +59,20 @@ public class CategoryController implements CategoryApi {
   @Override
   public CategoryApiOutput getCategoryById(String id) {
     return CategoryApiPresenter.present(this.getCategoryByIdUseCase.execute(id));
+  }
+
+  @Override
+  public ResponseEntity<?> updateCategoryById(final String id, final UpdateCategoryApiInput input) {
+
+    final var command =
+            UpdateCategoryCommand.with(
+                    id,input.name(), input.description(), input.active() != null ? input.active() : true);
+
+    return this.updateCategoryUseCase
+            .execute(command)
+            .fold(
+                    notification -> ResponseEntity.unprocessableEntity().body(notification),
+                    ResponseEntity::ok
+            );
   }
 }

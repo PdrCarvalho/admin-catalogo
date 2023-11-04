@@ -7,6 +7,7 @@ import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
+import com.fullcycle.admin.catalogo.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -210,7 +211,7 @@ public class UpdateCategoryUseCaseTest extends UseCaseTest {
                 .thenReturn(Optional.empty());
 
         final var actualException =
-                Assertions.assertThrows(DomainException.class, () -> useCase.execute(aCommand));
+                Assertions.assertThrows(NotFoundException.class, () -> useCase.execute(aCommand));
 
         Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
 

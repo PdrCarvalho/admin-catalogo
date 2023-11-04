@@ -6,6 +6,7 @@ import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUs
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryGateway;
 import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
+import com.fullcycle.admin.catalogo.domain.exceptions.NotFoundException;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -190,7 +191,7 @@ public class UpdateCategoryUseCaseIT {
         );
 
         final var actualException =
-                Assertions.assertThrows(DomainException.class, () -> useCase.execute(aCommand));
+                Assertions.assertThrows(NotFoundException.class, () -> useCase.execute(aCommand));
 
         Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
     }
