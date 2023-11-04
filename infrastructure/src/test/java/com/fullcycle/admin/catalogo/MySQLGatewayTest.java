@@ -18,7 +18,7 @@ import static org.springframework.context.annotation.FilterType.REGEX;
 @DataJpaTest
 @ComponentScan(
         includeFilters = {
-                @ComponentScan.Filter(type = REGEX, pattern = ".*[MySQLGateway]")
+                @ComponentScan.Filter(type = REGEX, pattern = ".[MySQLGateway]")
         }
 )
 @ExtendWith(CleanUpExtensions.class)
