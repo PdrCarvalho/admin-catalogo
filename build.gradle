@@ -11,9 +11,10 @@ repositories {
 }
 spotless {
     java {
+        target 'application/src/*/java/**/*.java','domain/src/*/java/**/*.java','infrastructure/src/*/java/**/*.java'
         importOrder()
         removeUnusedImports()
-        //eclipse()
+        eclipse()
     }
 }
 
