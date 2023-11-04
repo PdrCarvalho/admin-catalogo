@@ -10,17 +10,11 @@ repositories {
     mavenCentral()
 }
 spotless {
-    format 'misc', {
-        target '*.gradle', '*.md', '.gitignore'
-        trimTrailingWhitespace()
-        endWithNewline()
-        setEncoding('utf-8')
-    }
     java {
         target 'src/*/java/**/*.java'
         importOrder()
         removeUnusedImports()
-        googleJavaFormat()
+        eclipse()
     }
 }
 
