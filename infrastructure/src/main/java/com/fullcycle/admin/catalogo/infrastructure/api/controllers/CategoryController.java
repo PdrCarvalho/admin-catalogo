@@ -28,8 +28,7 @@ public class CategoryController implements CategoryApi {
   public CategoryController(
       final CreateCategoryUseCase createCategoryUseCase,
       final GetCategoryByIdUseCase getCategoryByIdUseCase,
-      final UpdateCategoryUseCase updateCategoryUseCase
-  ) {
+      final UpdateCategoryUseCase updateCategoryUseCase) {
     this.createCategoryUseCase = Objects.requireNonNull(createCategoryUseCase);
     this.getCategoryByIdUseCase = Objects.requireNonNull(getCategoryByIdUseCase);
     this.updateCategoryUseCase = Objects.requireNonNull(updateCategoryUseCase);
@@ -65,14 +64,13 @@ public class CategoryController implements CategoryApi {
   public ResponseEntity<?> updateCategoryById(final String id, final UpdateCategoryApiInput input) {
 
     final var command =
-            UpdateCategoryCommand.with(
-                    id,input.name(), input.description(), input.active() != null ? input.active() : true);
+        UpdateCategoryCommand.with(
+            id, input.name(), input.description(), input.active() != null ? input.active() : true);
 
     return this.updateCategoryUseCase
-            .execute(command)
-            .fold(
-                    notification -> ResponseEntity.unprocessableEntity().body(notification),
-                    ResponseEntity::ok
-            );
+        .execute(command)
+        .fold(
+            notification -> ResponseEntity.unprocessableEntity().body(notification),
+            ResponseEntity::ok);
   }
 }

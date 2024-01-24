@@ -53,13 +53,15 @@ public interface CategoryApi {
         @ApiResponse(responseCode = "500", description = "An internal server error"),
       })
   CategoryApiOutput getCategoryById(@PathVariable(name = "id") String id);
+
   @PutMapping(value = "{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
   @Operation(summary = "Update category by Id")
   @ApiResponses(
-          value = {
-                  @ApiResponse(responseCode = "200", description = "Category update successfully"),
-                  @ApiResponse(responseCode = "404", description = "Not found category"),
-                  @ApiResponse(responseCode = "500", description = "An internal server error"),
-          })
-  ResponseEntity<?> updateCategoryById(@PathVariable(name = "id") String id, @RequestBody UpdateCategoryApiInput input);
+      value = {
+        @ApiResponse(responseCode = "200", description = "Category update successfully"),
+        @ApiResponse(responseCode = "404", description = "Not found category"),
+        @ApiResponse(responseCode = "500", description = "An internal server error"),
+      })
+  ResponseEntity<?> updateCategoryById(
+      @PathVariable(name = "id") String id, @RequestBody UpdateCategoryApiInput input);
 }
