@@ -29,7 +29,7 @@ public interface CategoryApi {
       })
   ResponseEntity<?> createCategory(@RequestBody CreateCategoryApiInput input);
 
-  @GetMapping
+  @GetMapping(produces = APPLICATION_JSON_VALUE)
   @Operation(summary = "List all categories paginated")
   @ApiResponses(
       value = {
@@ -44,7 +44,7 @@ public interface CategoryApi {
       @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
       @RequestParam(name = "dir", required = false, defaultValue = "asc") final String direction);
 
-  @GetMapping(value = "{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+  @GetMapping(value = "{id}", produces = APPLICATION_JSON_VALUE)
   @Operation(summary = "Get category by Id")
   @ApiResponses(
       value = {
