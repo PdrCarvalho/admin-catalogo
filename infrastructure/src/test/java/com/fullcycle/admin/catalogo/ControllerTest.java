@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(value = TYPE)
 @Retention(value = RUNTIME)
 @Inherited
-@ActiveProfiles("test")
+@ActiveProfiles("test-integration")
 @WebMvcTest
 @Import(ObjectMapperConfig.class)
 public @interface ControllerTest {

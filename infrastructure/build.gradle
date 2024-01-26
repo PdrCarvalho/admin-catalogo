@@ -51,6 +51,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 
     testRuntimeOnly('com.h2database:h2')
+
+    testImplementation('org.testcontainers:testcontainers:1.17.2')
+    testImplementation('org.testcontainers:mysql:1.17.2')
+    testImplementation('org.testcontainers:junit-jupiter:1.17.2')
 }
 
 flyway {

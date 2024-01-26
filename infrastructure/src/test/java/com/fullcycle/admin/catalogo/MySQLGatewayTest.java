@@ -14,7 +14,7 @@ import static org.springframework.context.annotation.FilterType.REGEX;
 @Target(value = TYPE)
 @Retention(value = RUNTIME)
 @Inherited
-@ActiveProfiles("test")
+@ActiveProfiles("test-integration")
 @DataJpaTest
 @ComponentScan(
         includeFilters = {

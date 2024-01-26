@@ -15,10 +15,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(value = TYPE)
 @Retention(value = RUNTIME)
 @Inherited
-@ActiveProfiles("test-integration")
+@ActiveProfiles("test-e2e")
 @SpringBootTest(
         classes = WebServerConfig.class
 )
 @ExtendWith(CleanUpExtensions.class)
-public @interface IntegrationTest {
+public @interface E2ETest {
 }
