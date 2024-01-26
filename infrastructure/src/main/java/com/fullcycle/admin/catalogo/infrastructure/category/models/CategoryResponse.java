@@ -3,7 +3,7 @@ package com.fullcycle.admin.catalogo.infrastructure.category.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 
-public record CategoryApiOutput(
+public record CategoryResponse(
     @JsonProperty("id") String id,
     @JsonProperty("name") String name,
     @JsonProperty("description") String description,

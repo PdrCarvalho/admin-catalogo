@@ -5,9 +5,10 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryApiOutput;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryApiInput;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryApiInput;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryListResponse;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,7 +29,7 @@ public interface CategoryApi {
                     @ApiResponse(responseCode = "422", description = "Unprocessable error"),
                     @ApiResponse(responseCode = "500", description = "An internal server error"),
             })
-    ResponseEntity<?> createCategory(@RequestBody CreateCategoryApiInput input);
+    ResponseEntity<?> createCategory(@RequestBody CreateCategoryRequest input);
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "List all categories paginated")
@@ -38,7 +39,7 @@ public interface CategoryApi {
                     @ApiResponse(responseCode = "422", description = "Invalid param received"),
                     @ApiResponse(responseCode = "500", description = "An internal server error"),
             })
-    Pagination<?> listCategories(
+    Pagination<CategoryListResponse> listCategories(
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
             @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
             @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
@@ -53,7 +54,7 @@ public interface CategoryApi {
                     @ApiResponse(responseCode = "404", description = "Not found category"),
                     @ApiResponse(responseCode = "500", description = "An internal server error"),
             })
-    CategoryApiOutput getCategoryById(@PathVariable(name = "id") String id);
+    CategoryResponse getCategoryById(@PathVariable(name = "id") String id);
 
     @PutMapping(value = "{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @Operation(summary = "Update category by Id")
@@ -64,7 +65,7 @@ public interface CategoryApi {
                     @ApiResponse(responseCode = "500", description = "An internal server error"),
             })
     ResponseEntity<?> updateCategoryById(
-            @PathVariable(name = "id") String id, @RequestBody UpdateCategoryApiInput input);
+            @PathVariable(name = "id") String id, @RequestBody UpdateCategoryRequest input);
 
     @DeleteMapping(value = "{id}")
     @Operation(summary = "Delete category by Id")
