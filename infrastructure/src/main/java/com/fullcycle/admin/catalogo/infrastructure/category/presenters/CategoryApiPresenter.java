@@ -2,8 +2,8 @@ package com.fullcycle.admin.catalogo.infrastructure.category.presenters;
 
 import com.fullcycle.admin.catalogo.application.category.retrieve.get.CategoryOutput;
 import com.fullcycle.admin.catalogo.application.category.retrieve.list.CategoryListOutput;
-import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryListResponse;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
 
 public interface CategoryApiPresenter {
 
@@ -20,11 +20,11 @@ public interface CategoryApiPresenter {
 
   static CategoryListResponse present(final CategoryListOutput category) {
     return new CategoryListResponse(
-            category.id().getValue(),
-            category.name(),
-            category.description(),
-            category.isActive(),
-            category.createdAt(),
-            category.deletedAt());
+        category.id().getValue(),
+        category.name(),
+        category.description(),
+        category.isActive(),
+        category.createdAt(),
+        category.deletedAt());
   }
 }
