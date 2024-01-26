@@ -2,6 +2,7 @@ package com.fullcycle.admin.catalogo.infrastructure.api.controllers;
 
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryCommand;
 import com.fullcycle.admin.catalogo.application.category.create.CreateCategoryUseCase;
+import com.fullcycle.admin.catalogo.application.category.delete.DeleteCategoryUseCase;
 import com.fullcycle.admin.catalogo.application.category.retrieve.get.GetCategoryByIdUseCase;
 import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryCommand;
 import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCase;
@@ -25,13 +26,18 @@ public class CategoryController implements CategoryApi {
 
   private final UpdateCategoryUseCase updateCategoryUseCase;
 
-  public CategoryController(
-      final CreateCategoryUseCase createCategoryUseCase,
-      final GetCategoryByIdUseCase getCategoryByIdUseCase,
-      final UpdateCategoryUseCase updateCategoryUseCase) {
+  private final DeleteCategoryUseCase deleteCategoryUseCase;
+
+    public CategoryController(
+          final CreateCategoryUseCase createCategoryUseCase,
+          final GetCategoryByIdUseCase getCategoryByIdUseCase,
+          final UpdateCategoryUseCase updateCategoryUseCase,
+          final DeleteCategoryUseCase deleteCategoryUseCase
+          ) {
     this.createCategoryUseCase = Objects.requireNonNull(createCategoryUseCase);
     this.getCategoryByIdUseCase = Objects.requireNonNull(getCategoryByIdUseCase);
     this.updateCategoryUseCase = Objects.requireNonNull(updateCategoryUseCase);
+    this.deleteCategoryUseCase = Objects.requireNonNull(deleteCategoryUseCase);
   }
 
   @Override
@@ -72,5 +78,10 @@ public class CategoryController implements CategoryApi {
         .fold(
             notification -> ResponseEntity.unprocessableEntity().body(notification),
             ResponseEntity::ok);
+  }
+
+  @Override
+  public void deleteCategoryById(String id) {
+    this.deleteCategoryUseCase.execute(id);
   }
 }
