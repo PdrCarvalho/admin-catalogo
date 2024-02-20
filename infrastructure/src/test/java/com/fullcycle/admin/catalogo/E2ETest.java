@@ -2,6 +2,7 @@ package com.fullcycle.admin.catalogo;
 
 import com.fullcycle.admin.catalogo.infrastructure.configuration.WebServerConfig;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -20,5 +21,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
         classes = WebServerConfig.class
 )
 @ExtendWith(CleanUpExtensions.class)
+@AutoConfigureMockMvc
 public @interface E2ETest {
 }
