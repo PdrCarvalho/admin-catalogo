@@ -39,7 +39,7 @@ jobs:
           distribution: 'adopt'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-      - name: Build da aplicação
+      - name: Build da aplication
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
           arguments: clean build -x test
@@ -56,10 +56,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PWD }}
-      - name: Build & push da imagem do docker
+      - name: Build & push da image do docker
         uses: docker/build-push-action@v3
         with:
-          context: .
+          #context: .
           push: true
           build-args: VERSION=${{ env.BUILD_TAG }}
           tags: ${{ env.IMAGE_NAME }}:${{ env.BUILD_TAG }}
