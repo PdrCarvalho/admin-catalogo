@@ -2,9 +2,6 @@ package com.fullcycle.admin.catalogo.infrastructure.api.controllers;
 
 import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
 import com.fullcycle.admin.catalogo.domain.exceptions.NotFoundException;
-import com.fullcycle.admin.catalogo.domain.validation.Error;
-import java.util.List;
-
 import com.fullcycle.admin.catalogo.infrastructure.api.controllers.models.ApiError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
